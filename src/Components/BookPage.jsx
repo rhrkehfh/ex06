@@ -1,9 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
 const BookPage = () => {
-    const ref_query = useRef(null);
     const [loading, setLoading] = useState(false);
     const [books, setBooks] = useState([]);
     const [total, setTotal] = useState(0);
@@ -23,7 +22,6 @@ const BookPage = () => {
         setTotal(result.data.meta.pageable_count);
         setIs_end(result.data.meta.is_end);
         console.log(result);
-        ref_query.current.focus();
         setLoading(false);
     }
 
@@ -44,8 +42,7 @@ const BookPage = () => {
                 <Form onSubmit={onSubmit}>
                     <Form.Control value={query} 
                     onChange={(e)=>setQuery(e.target.value)} 
-                    placeholder='검색어'
-                    ref={ref_query}/>
+                    placeholder='검색어'/>
                 </Form>
             </Col>
             <Col> 검색수:{total}건 </Col>
